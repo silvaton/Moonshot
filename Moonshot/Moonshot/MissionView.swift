@@ -1,6 +1,6 @@
 //
 //  MissionView.swift
-//  Project8-Moonshot
+//  Moonshot
 //
 //  Created by Ton Silva on 19/6/23.
 //
@@ -10,7 +10,7 @@ import SwiftUI
 struct MissionView: View {
     struct CrewMember {
         let role: String
-        let astronaut: Astrounaut
+        let astronaut: Astronaut
     }
     
     let mission: Mission
@@ -54,7 +54,7 @@ struct MissionView: View {
                         HStack {
                             ForEach(crew, id: \.role) { crewMember in
                                 NavigationLink {
-                                    Text("Astronaut Details")
+                                    AstronautView(astronaut: crewMember.astronaut)
                                 } label: {
                                     HStack {
                                         Image(crewMember.astronaut.id)
@@ -88,7 +88,7 @@ struct MissionView: View {
         .background(.darkBackground)
     }
     
-    init(mission: Mission, astronauts: [String: Astrounaut]) {
+    init(mission: Mission, astronauts: [String: Astronaut]) {
         self.mission = mission
         
         self.crew = mission.crew.map { member in
@@ -103,7 +103,7 @@ struct MissionView: View {
 
 struct MissionView_Previews: PreviewProvider {
     static let mission: [Mission] = Bundle.main.decode("missions.json")
-    static let astronauts: [String: Astrounaut] = Bundle.main.decode("astronauts.json")
+    static let astronauts: [String: Astronaut] = Bundle.main.decode("astronauts.json")
     
     static var previews: some View {
         MissionView(mission: mission[0], astronauts: astronauts)
